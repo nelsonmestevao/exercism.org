@@ -12,7 +12,7 @@ defmodule BankAccount do
   Open the bank. Makes the account available.
   """
   @spec open_bank() :: account
-  def open_bank() do
+  def open_bank do
     {:ok, pid} = Agent.start_link(fn -> 0 end)
     pid
   end
@@ -20,7 +20,7 @@ defmodule BankAccount do
   @doc """
   Close the bank. Makes the account unavailable.
   """
-  @spec close_bank(account) :: none
+  @spec close_bank(account) :: atom
   def close_bank(account) do
     Agent.stop(account)
   end
