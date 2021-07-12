@@ -1,5 +1,6 @@
 defmodule RnaTranscriptionTest do
   use ExUnit.Case
+  doctest RnaTranscription
 
   # @tag :pending
   test "transcribes guanine to cytosine" do
