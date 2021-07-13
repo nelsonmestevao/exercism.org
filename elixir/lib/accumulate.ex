@@ -1,4 +1,6 @@
 defmodule Accumulate do
+  @moduledoc false
+
   @doc """
     Given a list and a function, apply the function to each list item and
     replace it with the function's return value.

@@ -1,4 +1,5 @@
 defmodule DndCharacter do
+  @moduledoc false
   @type t :: %__MODULE__{
           strength: pos_integer(),
           dexterity: pos_integer(),

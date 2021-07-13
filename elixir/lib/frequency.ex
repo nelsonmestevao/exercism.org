@@ -1,4 +1,6 @@
 defmodule Frequency do
+  @moduledoc false
+
   @doc """
   Count letter frequency in parallel.
 

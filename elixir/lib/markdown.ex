@@ -1,4 +1,6 @@
 defmodule Markdown do
+  @moduledoc false
+
   @doc """
     Parses a given string with Markdown syntax and returns the associated HTML for that string.
 

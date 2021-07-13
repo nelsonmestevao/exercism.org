@@ -1,7 +1,5 @@
 defmodule RomanNumerals do
-  @doc """
-  Convert the number to a roman number.
-  """
+  @moduledoc false
   @roman [
     {1_000, "M"},
     {900, "CM"},
@@ -18,6 +16,9 @@ defmodule RomanNumerals do
     {1, "I"}
   ]
 
+  @doc """
+  Convert the number to a roman number.
+  """
   @spec numeral(pos_integer) :: String.t()
   def numeral(0), do: ""
 

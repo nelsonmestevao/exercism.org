@@ -1,5 +1,11 @@
 defmodule RobotSimulator do
-  defmodule Robot, do: defstruct(direction: :north, position: {0, 0})
+  @moduledoc false
+
+  defmodule Robot do
+    @moduledoc false
+    defstruct(direction: :north, position: {0, 0})
+  end
+
   defguard is_direction(direction) when direction in [:north, :east, :south, :west]
   defguard is_position(x, y) when is_integer(x) and is_integer(y)
 

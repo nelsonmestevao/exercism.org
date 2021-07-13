@@ -1,4 +1,6 @@
 defmodule Bob do
+  @moduledoc false
+
   @doc """
   Responds to different types of phrases
 

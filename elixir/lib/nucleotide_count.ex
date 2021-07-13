@@ -1,4 +1,5 @@
 defmodule NucleotideCount do
+  @moduledoc false
   @nucleotides [?A, ?C, ?G, ?T]
 
   @doc """
@@ -6,11 +7,11 @@ defmodule NucleotideCount do
 
   ## Examples
 
-  iex> NucleotideCount.count('AATAA', ?A)
-  4
+    iex> NucleotideCount.count('AATAA', ?A)
+    4
 
-  iex> NucleotideCount.count('AATAA', ?T)
-  1
+    iex> NucleotideCount.count('AATAA', ?T)
+    1
   """
   @spec count(charlist(), char()) :: non_neg_integer()
   def count(strand, nucleotide) do
@@ -22,8 +23,8 @@ defmodule NucleotideCount do
 
   ## Examples
 
-  iex> NucleotideCount.histogram('AATAA')
-  %{?A => 4, ?T => 1, ?C => 0, ?G => 0}
+    iex> NucleotideCount.histogram('AATAA')
+    %{?A => 4, ?T => 1, ?C => 0, ?G => 0}
   """
   @spec histogram(charlist()) :: map()
   def histogram(strand) do

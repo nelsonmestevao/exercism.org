@@ -1,4 +1,6 @@
 defmodule ProteinTranslation do
+  @moduledoc false
+
   @codons %{
     "UGU" => "Cysteine",
     "UGC" => "Cysteine",

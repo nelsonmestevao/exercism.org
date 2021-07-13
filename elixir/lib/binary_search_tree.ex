@@ -1,4 +1,6 @@
 defmodule BinarySearchTree do
+  @moduledoc false
+
   @type bst_node :: %{data: any, left: bst_node | nil, right: bst_node | nil}
 
   @doc """

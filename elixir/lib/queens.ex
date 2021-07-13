@@ -1,4 +1,6 @@
 defmodule Queens do
+  @moduledoc false
+
   @type t :: %__MODULE__{black: {integer, integer}, white: {integer, integer}}
   defstruct [:white, :black]
 

@@ -1,4 +1,6 @@
 defmodule RnaTranscription do
+  @moduledoc false
+
   @complements %{
     ?G => ?C,
     ?C => ?G,

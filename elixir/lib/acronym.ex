@@ -1,4 +1,6 @@
 defmodule Acronym do
+  @moduledoc false
+
   @doc """
     Generate an acronym from a string.
 

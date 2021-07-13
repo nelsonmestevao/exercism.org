@@ -1,4 +1,6 @@
 defmodule Raindrops do
+  @moduledoc false
+
   @drops %{3 => "Pling", 5 => "Plang", 7 => "Plong"}
 
   @doc """

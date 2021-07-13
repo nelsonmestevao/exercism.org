@@ -1,4 +1,6 @@
 defmodule HelloWorld do
+  @moduledoc false
+
   @doc """
   Simply returns "Hello, World!"
   """
