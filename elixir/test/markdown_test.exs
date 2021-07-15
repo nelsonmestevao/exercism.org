@@ -1,5 +1,6 @@
 defmodule MarkdownTest do
   use ExUnit.Case
+  doctest Markdown
 
   # @tag :pending
   test "parses normal text as a paragraph" do
