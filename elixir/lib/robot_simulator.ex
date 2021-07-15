@@ -29,22 +29,20 @@ defmodule RobotSimulator do
   Valid instructions are: "R" (turn right), "L", (turn left), and "A" (advance)
   """
   @spec simulate(robot :: any, instructions :: String.t()) :: any
-  def simulate(robot, "") do
-    robot
-  end
+  def simulate(robot, ""), do: robot
 
-  def simulate(%Robot{direction: direction, position: position}, instructions) do
+  def simulate(%Robot{direction: direction, position: position} = robot, instructions) do
     {first, rest} = String.split_at(instructions, 1)
 
     case first do
       "R" ->
-        %Robot{direction: right(direction), position: position} |> simulate(rest)
+        %Robot{robot | direction: right(direction)} |> simulate(rest)
 
       "L" ->
-        %Robot{direction: left(direction), position: position} |> simulate(rest)
+        %Robot{robot | direction: left(direction)} |> simulate(rest)
 
       "A" ->
-        %Robot{direction: direction, position: avance(direction, position)}
+        %Robot{robot | position: avance(direction, position)}
         |> simulate(rest)
 
       _ ->
@@ -58,17 +56,13 @@ defmodule RobotSimulator do
   Valid directions are: `:north`, `:east`, `:south`, `:west`
   """
   @spec direction(robot :: any) :: atom
-  def direction(%Robot{} = robot) do
-    robot.direction
-  end
+  def direction(%Robot{direction: direction}), do: direction
 
   @doc """
   Return the robot's position.
   """
   @spec position(robot :: any) :: {integer, integer}
-  def position(%Robot{} = robot) do
-    robot.position
-  end
+  def position(%Robot{position: position}), do: position
 
   defp avance(direction, {x, y}) do
     case direction do
