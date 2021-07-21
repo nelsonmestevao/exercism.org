@@ -3,7 +3,7 @@ defmodule Zipper do
           value: any,
           left: BinTree.t() | nil,
           right: BinTree.t() | nil,
-          trail: [{:left | :right, any, BinTree.t() | nil}]
+          trail: [{:left | :right, BinTree.t() | nil}]
         }
   defstruct [:value, :left, :right, trail: []]
 
@@ -19,8 +19,8 @@ defmodule Zipper do
   Get the complete tree from a zipper.
   """
   @spec to_tree(Zipper.t()) :: BinTree.t()
-  def to_tree(%Zipper{value: value, left: left, right: right, trail: []}) do
-    %BinTree{value: value, left: left, right: right}
+  def to_tree(%Zipper{trail: []} = zipper) do
+    focus_to_tree(zipper)
   end
 
   def to_tree(zipper) do
@@ -43,17 +43,11 @@ defmodule Zipper do
   def left(%Zipper{left: nil}), do: nil
 
   def left(%Zipper{value: value, left: left, right: right, trail: trail}) do
-    tree =
-      case right do
-        nil -> nil
-        _ -> %BinTree{value: right.value, left: right.left, right: right.right}
-      end
-
     %Zipper{
       value: left.value,
       left: left.left,
       right: left.right,
-      trail: [{:left, value, tree} | trail]
+      trail: [{:left, %BinTree{value: value, right: right}} | trail]
     }
   end
 
@@ -64,17 +58,11 @@ defmodule Zipper do
   def right(%Zipper{right: nil}), do: nil
 
   def right(%Zipper{value: value, left: left, right: right, trail: trail}) do
-    tree =
-      case left do
-        nil -> nil
-        _ -> %BinTree{value: left.value, left: left.left, right: left.right}
-      end
-
     %Zipper{
       value: right.value,
       left: right.left,
       right: right.right,
-      trail: [{:right, value, tree} | trail]
+      trail: [{:right, %BinTree{value: value, left: left}} | trail]
     }
   end
 
@@ -86,16 +74,12 @@ defmodule Zipper do
 
   def up(zipper) when length(zipper.trail) == 0, do: nil
 
-  def up(%Zipper{value: value, left: left, right: right, trail: [{side, top, rest} | tail]}) do
-    tree = %BinTree{value: value, left: left, right: right}
+  def up(%Zipper{trail: [{:left, rest} | tail]} = zipper) do
+    %Zipper{value: rest.value, left: focus_to_tree(zipper), right: rest.right, trail: tail}
+  end
 
-    case side do
-      :left ->
-        %Zipper{value: top, left: tree, right: rest, trail: tail}
-
-      :right ->
-        %Zipper{value: top, left: rest, right: tree, trail: tail}
-    end
+  def up(%Zipper{trail: [{:right, rest} | tail]} = zipper) do
+    %Zipper{value: rest.value, left: rest.left, right: focus_to_tree(zipper), trail: tail}
   end
 
   @doc """
@@ -120,5 +104,9 @@ defmodule Zipper do
   @spec set_right(Zipper.t(), BinTree.t() | nil) :: Zipper.t()
   def set_right(zipper, right) do
     %Zipper{zipper | right: right}
+  end
+
+  defp focus_to_tree(%Zipper{value: value, left: left, right: right}) do
+    %BinTree{value: value, left: left, right: right}
   end
 end
