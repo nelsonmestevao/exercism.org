@@ -1,4 +1,6 @@
 defmodule SpaceAge do
+  @moduledoc false
+
   @type planet ::
           :mercury
           | :venus

@@ -3,11 +3,13 @@ defmodule Exercism.MixProject do
 
   def project do
     [
-      app: :list_ops,
+      app: :exercism,
       version: "0.1.0",
-      elixir: "~> 1.12",
+      elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      aliases: aliases(),
+      preferred_cli_env: [check: :test]
     ]
   end
 
@@ -22,7 +24,22 @@ defmodule Exercism.MixProject do
   defp deps do
     [
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
-      {:credo, "~> 1.2", only: [:dev], runtime: false}
+      {:credo, "~> 1.6", only: [:dev], runtime: false}
+    ]
+  end
+
+  defp aliases do
+    [
+      lint: ["credo --strict --all"],
+      check: [
+        "clean",
+        "deps.unlock --check-unused",
+        "compile --all-warnings --warnings-as-errors",
+        "format --check-formatted",
+        "deps.unlock --check-unused",
+        "test --warnings-as-errors",
+        "lint"
+      ]
     ]
   end
 end

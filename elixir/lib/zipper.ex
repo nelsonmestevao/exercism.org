@@ -1,4 +1,5 @@
 defmodule Zipper do
+  @moduledoc false
   @type t :: %Zipper{
           value: any,
           left: BinTree.t() | nil,
@@ -72,7 +73,7 @@ defmodule Zipper do
   @spec up(Zipper.t()) :: Zipper.t() | nil
   def up(nil), do: nil
 
-  def up(zipper) when length(zipper.trail) == 0, do: nil
+  def up(zipper) when zipper.trail == [], do: nil
 
   def up(%Zipper{trail: [{:left, rest} | tail]} = zipper) do
     %Zipper{value: rest.value, left: focus_to_tree(zipper), right: rest.right, trail: tail}
