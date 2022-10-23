@@ -1,5 +1,5 @@
 {
-  "name": "@exercism/typescript-resistor-color-duo",
+  "name": "exercism",
   "version": "1.0.0",
   "description": "Exercism exercises in Typescript.",
   "private": true,
